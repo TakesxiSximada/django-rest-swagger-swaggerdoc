@@ -2,8 +2,12 @@ django-rest-swagger-swaggerdoc - Additional Document
 ====================================================
 
 .. image:: https://circleci.com/gh/TakesxiSximada/django-rest-swagger-swaggerdoc.svg?style=svg
-   :target: https://circleci.com/gh/TakesxiSximada/django-rest-swagger-swaggerdoc
-   :alt: CircleCI Status
+           :target: https://circleci.com/gh/TakesxiSximada/django-rest-swagger-swaggerdoc
+           :alt: CircleCI Status
+
+.. image:: https://codecov.io/gh/TakesxiSximada/django-rest-swagger-swaggerdoc/branch/master/graph/badge.svg
+           :target: https://codecov.io/gh/TakesxiSximada/django-rest-swagger-swaggerdoc
+           :alt: CodeCov Status
 
 Install
 -------
