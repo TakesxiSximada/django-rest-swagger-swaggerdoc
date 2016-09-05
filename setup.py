@@ -92,6 +92,9 @@ setup(
     zip_safe=False,
     install_requires=get_requirements('./requirements/install.txt'),
     tests_require=get_requirements('./requirements/test.txt'),
+    extra_require={
+        'testing': get_requirements('./requirements/test.txt'),
+    },
     cmdclass={
         'test': PyTest,
     },
