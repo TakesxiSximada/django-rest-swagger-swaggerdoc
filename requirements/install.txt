@@ -1,4 +1,5 @@
-django
+Django
+djangorestframework
 django-rest-swagger
-yaml
+PyYAML
 zope.dottedname

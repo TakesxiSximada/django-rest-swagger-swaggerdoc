@@ -29,7 +29,7 @@ def read(name, mode='rb', encoding='utf8'):
 
 def get_requirements(name, mode='rb', encoding='utf8'):
     with open(here(name), mode) as fp:
-        return [line.strip() for line in fp]
+        return [line.strip().decode() for line in fp]
 
 
 def get_version_str(file_path):
@@ -91,8 +91,8 @@ setup(
     platforms='any',
     include_package_data=True,
     zip_safe=False,
-    install_requires=get_requirements('requirements/install.txt'),
-    test_require=get_requirements('requirements/test.txt'),
+    install_requires=get_requirements('./requirements/install.txt'),
+    tests_require=get_requirements('./requirements/test.txt'),
     cmdclass={
         'test': PyTest,
     },
