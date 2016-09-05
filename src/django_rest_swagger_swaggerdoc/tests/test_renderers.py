@@ -60,6 +60,60 @@ class SwaggerDocResulveTest(unittest.TestCase):
         self.assertIsInstance(swagger_doc, SwaggerDoc)
 
 
+class OverwriteDataTest(unittest.TestCase):
+    def _call_fut(self, *args, **kwds):
+        from ..renderers import overwrite_data
+        return overwrite_data(*args, **kwds)
+
+    def test_it(self):
+        from ..documents import SwaggerDoc
+        data = {
+            'paths': {
+                '/': {
+                    'get': {},
+                }
+            }
+        }
+
+        swagger_doc = SwaggerDoc()
+        swagger_doc['get'] = {
+            'description': 'test description',
+        }
+        self._call_fut(url='/', method='get', data=data, swaggerdoc=swagger_doc)
+        self.assertEqual(data['paths']['/']['get']['description'], 'test description')
+
+    def test_ignore_key_error(self):
+        from ..documents import SwaggerDoc
+        data = {
+            'paths': {
+            }
+        }
+
+        swagger_doc = SwaggerDoc()
+        swagger_doc['get'] = {
+            'description': 'test description',
+        }
+
+        self._call_fut(url='/', method='get', data=data, swaggerdoc=swagger_doc)
+
+    def test_ignore_type_error(self):
+        from ..documents import SwaggerDoc
+        data = {
+            'paths': {
+                '/': {
+                    'get': None
+                }
+            }
+        }
+
+        swagger_doc = SwaggerDoc()
+        swagger_doc['get'] = {
+            'description': 'test description',
+        }
+
+        self._call_fut(url='/', method='get', data=data, swaggerdoc=swagger_doc)
+
+
 class SwaggerAdditinalDocRendererTest(unittest.TestCase):
     def _get_target(self):
         from ..renderers import SwaggerAdditinalDocRenderer as target

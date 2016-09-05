@@ -10,6 +10,9 @@ class GetCallerModuleTest(unittest.TestCase):
         target = self._get_target()
         return target()
 
+    def test_depth(self):
+        self._call_func(depth=1)
+
     def test_it(self):
         import os
         from zope.dottedname.resolve import resolve

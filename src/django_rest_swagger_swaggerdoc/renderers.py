@@ -25,7 +25,7 @@ def overwrite_data(url, method, data, swaggerdoc):
     additional_data = dict(swaggerdoc).get(method, {})
     try:
         data['paths'][url][method].update(additional_data)
-    except (KeyError, TypeError) as err:
+    except (KeyError, TypeError, AttributeError) as err:
         logger.debug('Cannot update swagger data: %r', err)
 
 
