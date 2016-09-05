@@ -19,7 +19,10 @@ class SwaggerAdditinalDocRendererTest(unittest.TestCase):
             'request': request_factory.get('/')
         }
         data = {
-            'paths': {},
+            'paths': {
+                'get': {
+                },
+            },
         }
 
         renderer = self._make_one()
