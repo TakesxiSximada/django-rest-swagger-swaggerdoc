@@ -1,0 +1,18 @@
+machine:
+  python:
+    version: 3.5.0
+  environment:
+    TOX_PY35: 3.5.0
+
+dependencies:
+  cache_directories:
+    - ~/.cache/pip
+
+  pre:
+    - pip install requirements/test.txt
+
+test:
+  override:
+    - make test
+  post:
+    - bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
