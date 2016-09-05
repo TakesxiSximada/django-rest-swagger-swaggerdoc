@@ -1,4 +1,5 @@
+coverage
 detox
+mock
 pytest
 pytest-django
-coverage

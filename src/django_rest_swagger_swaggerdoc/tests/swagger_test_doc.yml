@@ -1,0 +1,11 @@
+get:
+  description: test document
+  responses:
+    200:
+      description: success
+    400:
+      description: bad request
+      schema:
+        type: json
+      headers:
+        Content-Type: application/json
