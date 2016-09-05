@@ -59,6 +59,17 @@ class SwaggerDocResulveTest(unittest.TestCase):
         swagger_doc = self._call_fut(url='/', method='get')
         self.assertIsInstance(swagger_doc, SwaggerDoc)
 
+    @mock.patch('django.core.urlresolvers.resolve')
+    @mock.patch('zope.dottedname.resolve.resolve')
+    def test_cannnot_to_get_swaggerdoc(self, zope_resolve, dj_resolve):
+        from django.urls import ResolverMatch
+
+        resulve_match = ResolverMatch(func=None, args=[], kwargs={})
+        dj_resolve.return_value = resulve_match
+        zope_resolve.return_value = None
+        swagger_doc = self._call_fut(url='/', method='get')
+        self.assertIsNone(swagger_doc)
+
 
 class OverwriteDataTest(unittest.TestCase):
     def _call_fut(self, *args, **kwds):
