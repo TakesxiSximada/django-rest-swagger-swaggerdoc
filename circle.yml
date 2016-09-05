@@ -1,8 +1,10 @@
 machine:
-  python:
-    version: 3.5.0
-  environment:
-    TOX_PY35: 3.5.0
+  # python:
+  #   version: 3.5.0
+  # environment:
+  #   TOX_PY35: 3.5.0
+  post:
+    - pyenv global 2.7.10 3.4.2 3.5.0
 
 dependencies:
   cache_directories:
