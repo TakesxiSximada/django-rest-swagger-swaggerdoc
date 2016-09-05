@@ -9,7 +9,7 @@ dependencies:
     - ~/.cache/pip
 
   pre:
-    - pip install requirements/test.txt
+    - pip install -r requirements/test.txt
 
 test:
   override:
