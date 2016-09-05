@@ -27,6 +27,11 @@ def read(name, mode='rb', encoding='utf8'):
         return fp.read().decode(encoding)
 
 
+def get_requirements(name, mode='rb', encoding='utf8'):
+    with open(here(name), mode) as fp:
+        return [line.strip() for line in fp]
+
+
 def get_version_str(file_path):
     version_file = read(file_path)
     version_match = re.search(
@@ -86,12 +91,8 @@ setup(
     platforms='any',
     include_package_data=True,
     zip_safe=False,
-    install_requires=[
-    ],
-    test_require=[
-        'pytest',
-        'coverage',
-    ],
+    install_requires=get_requirements('requirements/install.txt'),
+    test_require=get_requirements('requirements/test.txt'),
     cmdclass={
         'test': PyTest,
     },

@@ -1,0 +1,4 @@
+django
+django-rest-swagger
+yaml
+zope.dottedname
