@@ -2,7 +2,7 @@ machine:
   pre:
     - pyenv install -s 2.7.10
     - pyenv install -s 3.4.4
-    - pyenv install -s 3.5.2
+    - pyenv install -s 3.5.0
     - pyenv global 2.7.10 3.4.4 3.5.0
 
 dependencies:
