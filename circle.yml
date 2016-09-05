@@ -1,6 +1,10 @@
 machine:
   pre:
-    - pyenv install 2.7.10 3.4.4 3.5.2 pypy3-2.4.0
+    - pyenv install 2.7.10
+    - pyenv install 3.4.4
+    - pyenv install 3.5.2
+    - pyenv install pypy3-2.4.0
+    - pyenv global 2.7.10 3.4.4 3.5.2 pypy3-2.4.0
 
 dependencies:
   cache_directories:
