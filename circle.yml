@@ -7,7 +7,7 @@ machine:
 dependencies:
   cache_directories:
     - ~/.cache/pip/
-    - ~/.cache/tox/django-rest-swagger-swaggerdoc/
+    - ~/django-rest-swagger-swaggerdoc/.tox
 
   pre:
     - pip install -r requirements/test.txt
