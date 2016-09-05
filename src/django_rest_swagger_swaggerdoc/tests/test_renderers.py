@@ -20,7 +20,9 @@ class SwaggerAdditinalDocRendererTest(unittest.TestCase):
         }
         data = {
             'paths': {
-                'get': {
+                '/': {
+                    'get': {
+                    },
                 },
             },
         }
