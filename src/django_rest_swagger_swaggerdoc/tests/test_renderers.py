@@ -1,5 +1,63 @@
 # -*- coding: utf-8 -*-
+import os
 import unittest
+
+import rest_framework.decorators as rest_decorators
+import rest_framework.views as rest_views
+
+from .compat import mock
+from .. import decorators
+
+here = os.path.dirname(os.path.abspath(__file__))
+
+# =================== TEST VIEW ================================================
+
+
+@decorators.swaggerdoc('swagger_test_doc.yml')
+@rest_decorators.api_view()
+def example_view(request):
+    pass
+
+
+class ExampleView(rest_views.APIView):
+    @decorators.swaggerdoc('swagger_test_doc.yml')
+    def get(self, request):
+        pass
+
+# ==============================================================================
+
+
+class SwaggerDocResulveTest(unittest.TestCase):
+
+    def _call_fut(self, *args, **kwds):
+        from ..renderers import resolve_swagger_doc as target
+        return target(*args, **kwds)
+
+    @mock.patch('django.core.urlresolvers.resolve')
+    def test_func_style_view(self, resolve):
+        from django.urls import ResolverMatch
+        from ..documents import SwaggerDoc
+
+        resulve_match = ResolverMatch(func=example_view, args=[], kwargs={})
+
+        resolve.return_value = resulve_match
+
+        swagger_doc = self._call_fut(url='/', method='get')
+        self.assertIsInstance(swagger_doc, SwaggerDoc)
+
+    @mock.patch('django.core.urlresolvers.resolve')
+    def test_class_style_view(self, resolve):
+        from django.urls import ResolverMatch
+        from ..documents import SwaggerDoc
+
+        view = ExampleView()
+        resulve_match = ResolverMatch(func=view.get, args=[], kwargs={})
+        resulve_match.func_name = '{}.{}'.format(
+            ExampleView.__module__, ExampleView.__name__)
+        resolve.return_value = resulve_match
+
+        swagger_doc = self._call_fut(url='/', method='get')
+        self.assertIsInstance(swagger_doc, SwaggerDoc)
 
 
 class SwaggerAdditinalDocRendererTest(unittest.TestCase):
@@ -11,8 +69,15 @@ class SwaggerAdditinalDocRendererTest(unittest.TestCase):
         target = self._get_target()
         return target(*args, **kwds)
 
-    def test_it(self):
+    @mock.patch('django_rest_swagger_swaggerdoc.renderers.resolve_swagger_doc')
+    def test_it(self, resolve_swagger_doc):
         from django.test.client import RequestFactory
+        from ..documents import SwaggerDoc
+
+        swagger_doc = SwaggerDoc()
+        swagger_yml_path = os.path.join(here, 'swagger_test_doc.yml')
+        swagger_doc.load_yaml(swagger_yml_path)
+        resolve_swagger_doc.return_value = swagger_doc
 
         request_factory = RequestFactory()
         context = {
@@ -26,6 +91,7 @@ class SwaggerAdditinalDocRendererTest(unittest.TestCase):
                 },
             },
         }
-
         renderer = self._make_one()
+
         renderer.add_customizations(data, context)
+        self.assertEqual(data['paths']['/']['get']['description'], 'test document')
