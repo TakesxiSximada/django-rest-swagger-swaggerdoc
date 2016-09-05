@@ -27,7 +27,7 @@ staging:
 
 .PHONY: test
 test:
-	detox -v --recreate
+	detox -v
 
 .PHONY: version
 version:
