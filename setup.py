@@ -87,7 +87,10 @@ setup(
     zip_safe=False,
     install_requires=[
     ],
-    test_require=['pytest'],
+    test_require=[
+        'pytest',
+        'coverage',
+    ],
     cmdclass={
         'test': PyTest,
     },
