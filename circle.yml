@@ -13,7 +13,6 @@ dependencies:
     - ~/django-rest-swagger-swaggerdoc/.tox
 
   pre:
-    - pip install -r requirements/install.txt
     - pip install -r requirements/test.txt
 
 test:
