@@ -8,6 +8,7 @@ machine:
 
 dependencies:
   cache_directories:
+    - /opt/circleci/.pyenv
     - ~/.cache/pip/
     - ~/django-rest-swagger-swaggerdoc/.tox
 
