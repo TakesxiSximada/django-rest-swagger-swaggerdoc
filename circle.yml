@@ -21,6 +21,6 @@ test:
     - python2.7 -V
     - python3.4 -V
     - python3.5 -V
-    # - make test
+    - make test
   post:
     - bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
