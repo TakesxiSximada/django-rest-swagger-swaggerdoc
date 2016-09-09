@@ -8,10 +8,10 @@ class GetCallerModuleTest(unittest.TestCase):
 
     def _call_func(self, *args, **kwds):
         target = self._get_target()
-        return target()
+        return target(*args, **kwds)
 
     def test_depth(self):
-        self._call_func(depth=1)
+        self._call_func(depth=2)
 
     def test_it(self):
         import os
