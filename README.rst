@@ -48,12 +48,12 @@ How to use it
        from django_rest_swagger_swaggerdoc import swaggerdoc
 
        @swaggerdoc('api_test_doc.yml')
-       @rest_decorators.api_view()
+       @api_view()
        def example_view(request):
            pass
 
-       class ExampleView(rest_views.APIView):
-           @decorators.swaggerdoc('./api_test_doc.yml')
+       class ExampleView(APIView):
+           @swaggerdoc('./api_test_doc.yml')
            def get(self, request):
                pass
 

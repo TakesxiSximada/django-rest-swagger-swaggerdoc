@@ -92,8 +92,8 @@ setup(
     zip_safe=False,
     install_requires=get_requirements('./requirements/install.txt'),
     tests_require=get_requirements('./requirements/test.txt'),
-    extra_require={
-        'testing': get_requirements('./requirements/test.txt') + get_requirements('./requirements/install.txt'),
+    extras_require={
+        'testing': get_requirements('./requirements/test.txt') + get_requirements('./requirements/install.txt'),  # noqa
     },
     cmdclass={
         'test': PyTest,
