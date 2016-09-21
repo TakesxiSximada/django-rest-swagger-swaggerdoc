@@ -19,19 +19,23 @@ bump:
 
 .PHONY: production
 production:
-	python setup.py sdist bdist_wheel upload
+	rm dist/*
+	python setup.py sdist bdist_wheel
+	twine upload dist/*
 
 .PHONY: staging
 staging:
-	python setup.py sdist bdist_wheel upload -r https://testpypi.python.org/pypi
+	rm dist/*
+	python setup.py sdist bdist_wheel
+	twine upload dist/* -r testpypi
 
 .PHONY: test
 test:
-	detox -v --recreate
+	detox -v $(args)
 
 .PHONY: version
 version:
 	@rm -f $(BUILD_LOG)
 	@python setup.py build 2> $(BUILD_LOG) 1> /dev/null
 	@if [ -s $(BUILD_LOG) ]; then cat $(BUILD_LOG); exit 1; fi
-	@grep "^Version" `gfind -name PKG-INFO` | cut -d " " -f 2
+	@grep "^Version" `gfind src -name PKG-INFO` | cut -d " " -f 2
