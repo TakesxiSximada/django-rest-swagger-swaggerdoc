@@ -16,7 +16,17 @@ This package provides functions to inject a swagger style yaml data to the djang
 How to use it
 -------------
 
-1. You create a swagger style yaml file.
+1. Add rest_framework_swagger to your INSTALLED_APPS setting
+
+   settings.py::
+
+     INSTALLED_APPS = (
+         ...
+        'rest_framework_swagger',
+     )
+
+
+2. You create a swagger style yaml file.
 
    This YAML file is swagger style.
 
@@ -35,7 +45,7 @@ How to use it
                Content-Type: application/json
 
 
-2. You create api view function or ViewClass.
+3. You create api view function or ViewClass.
 
    The swaggerdoc decorator to specify the relative path from the file
    the view callable is defined.
@@ -57,6 +67,28 @@ How to use it
            def get(self, request):
                pass
 
+4. You create document schema view.
+
+   Use django_rest_swagger_swaggerdoc.renderers.SwaggerAdditinalDocRenderer.
+   DO NOT USE rest_framework_swagger.renderers.OpenAPIRenderer.
+
+   views.py::
+
+       from rest_framework_swagger.renderers import SwaggerUIRenderer
+       from rest_framework.decorators import api_view, renderer_classes
+       from rest_framework import response, schemas
+
+       from django_rest_swagger_swaggerdoc.renderers import SwaggerAdditinalDocRenderer
+
+
+       @api_view()
+       @renderer_classes([SwaggerUIRenderer, SwaggerAdditinalDocRenderer])
+       def schema_view(request):
+           generator = schemas.SchemaGenerator(title='Pastebin API')
+           return response.Response(generator.get_schema(request=request))
+
+
+See example project: https://github.com/TakesxiSximada/django-rest-swagger-swaggerdoc/examples
 
 Install
 -------
