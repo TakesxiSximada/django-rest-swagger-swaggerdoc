@@ -88,7 +88,7 @@ How to use it
            return response.Response(generator.get_schema(request=request))
 
 
-See example project: https://github.com/TakesxiSximada/django-rest-swagger-swaggerdoc/examples
+See example project: https://github.com/TakesxiSximada/django-rest-swagger-swaggerdoc/tree/master/examples
 
 Install
 -------
