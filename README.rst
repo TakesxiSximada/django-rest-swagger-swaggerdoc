@@ -20,19 +20,19 @@ How to use it
 
    This YAML file is swagger style.
 
-./api_test_doc.yml::
+   ./api_test_doc.yml::
 
-    get:
-      description: test document
-      responses:
-        200:
-          description: success
-        400:
-          description: bad request
-          schema:
-            type: json
-          headers:
-            Content-Type: application/json
+       get:
+         description: test document
+         responses:
+           200:
+             description: success
+           400:
+             description: bad request
+             schema:
+               type: json
+             headers:
+               Content-Type: application/json
 
 
 2. You create api view function or ViewClass.
@@ -40,22 +40,22 @@ How to use it
    The swaggerdoc decorator to specify the relative path from the file
    the view callable is defined.
 
-views.py::
+   views.py::
 
-    from rest_framework.decorators import api_view
-    from rest_framework.views import APIView
+       from rest_framework.decorators import api_view
+       from rest_framework.views import APIView
 
-    from django_rest_swagger_swaggerdoc import swaggerdoc
+       from django_rest_swagger_swaggerdoc import swaggerdoc
 
-    @swaggerdoc('api_test_doc.yml')
-    @rest_decorators.api_view()
-    def example_view(request):
-        pass
+       @swaggerdoc('api_test_doc.yml')
+       @rest_decorators.api_view()
+       def example_view(request):
+           pass
 
-    class ExampleView(rest_views.APIView):
-        @decorators.swaggerdoc('./api_test_doc.yml')
-        def get(self, request):
-            pass
+       class ExampleView(rest_views.APIView):
+           @decorators.swaggerdoc('./api_test_doc.yml')
+           def get(self, request):
+               pass
 
 
 Install
