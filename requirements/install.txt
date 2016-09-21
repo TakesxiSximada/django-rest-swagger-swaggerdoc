@@ -1,6 +1,6 @@
 Django
 PyYAML
 django-rest-swagger
-djangorestframework
+djangorestframework>=3.4.7
 six
 zope.dottedname
