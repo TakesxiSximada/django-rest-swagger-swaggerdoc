@@ -1,16 +1,17 @@
 from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from django_rest_swagger_swaggerdoc import swaggerdoc
 
 
-@swaggerdoc('api_test_doc.yml')
+@swaggerdoc('swaggerdoc/example1.yml')
 @api_view()
-def example_view(request):
-    pass
+def example1_view(request):
+    return Response('example1')
 
 
-class ExampleView(APIView):
-    @swaggerdoc('./api_test_doc.yml')
+class Example2View(APIView):
+    @swaggerdoc('swaggerdoc/example2.yml')
     def get(self, request):
-        pass
+        return Response('example2')
